@@ -1,0 +1,35 @@
+<div class="col-md-12 mt-3">
+    <div class="container-fluid text-center">
+        <h1> {{page_title}}</h1>
+        <p>Create a new category for your blog! </p>
+        <hr>
+    </div>
+    <div class="text-center">
+        <div class="alert alert-success offset-md-3 col-md-6" *ngIf="status == 'success'">
+            Category {{category.name}} is created. You will be redirected to home!
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            Please, check the fields and try again.
+        </div> 
+     
+        <!-- Formulario de Crear categoria -->
+        <form class="offset-md-3 col-md-6" #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+            <p class="form-group">
+                <input required type="text" class="form-control" placeholder="Name" name="name" #name="ngModel"
+                    [(ngModel)]="category.name">
+                <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                    The field 'Name' is wrong.
+                </small>
+            </p>
+            <hr>
+            <section class="row">
+                <div class="col-6">
+                    <input type="submit" value="Save" class="btn btn-success" [disabled]="categoryForm.invalid">
+                </div>
+                <div class="col-6">
+                    <input type="button" (click)="btnCancel()" value="Cancel" class="btn btn-danger">
+                </div>
+            </section>
+        </form>
+    </div>
+</div>

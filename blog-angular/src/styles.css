@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+@media (prefers-color-scheme: dark){
+  :root{
+    background: fill;
+    filter: invert(1) hue-rotate(180deg);
+  }
+  img, video{
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
+
+@media (prefers-color-scheme: light){
+  
+}
+
+.userImg {
+  max-width: 40px;
+  border-radius: 25px;
+}
+
+@media screen and (max-width: 991px) {
+  .userImg {
+    display: none;
+  }
+}
+
+.post-image{
+  height: 200px;
+  overflow: hidden;
+}
+
+.post-detail-image{
+  max-height: 500px;
+  max-width: 629px;
+  text-align: center;
+}
+
+
+.loader{
+  margin: 0 0 2em;
+  height: 100px;
+  width: 20%;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/*
+  Set the color of the icon
+*/
+svg path,
+svg rect{
+  fill: #ff0000;
+}
+
+footer{
+  color: grey;
+}

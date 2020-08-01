@@ -1,0 +1,58 @@
+<div class="col-md-12 mt-3">
+    <div class="container-fluid text-center">
+        <h1> {{page_title}}</h1>
+        <p *ngIf="!is_edit">Create a new post for your blog! </p>
+        <p *ngIf="is_edit && post">Edit {{post.title}} for your blog! </p>
+        <hr>
+    </div>
+    <div class="text-center">
+        <div class="alert alert-success offset-md-3 col-md-6" *ngIf="status == 'success'">
+            Post {{post.title}} is created. You will be redirected to home!
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            Please, check the fields and try again.
+        </div> 
+
+        <!-- Formulario de Crear categoria -->
+        <form class="offset-md-3 col-md-6" #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+            <p class="form-group">
+                <input required type="text" class="form-control" placeholder="Title" name="title" #title="ngModel"
+                    [(ngModel)]="post.title">
+                <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+                    The field 'Title' is wrong.
+                </small>
+            </p>
+            <p class="form-group">
+                <textarea required [froalaEditor]="froala_Options" type="text" class="form-control" placeholder="Bio"
+                    name="content" #content="ngModel" [(ngModel)]="post.content">
+                </textarea>
+                <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+                    The field 'Content' is wrong.
+                </small>
+            </p>
+            <div class="form-group col-12">
+                <div class="row">
+                    <select class="form-control" name="category_id" #category="ngModel" [(ngModel)]="post.category_id">
+                        <option *ngFor="let category of categories" value="{{category.id}}">
+                            {{category.name}}
+                        </option>
+                    </select>
+
+                    <angular-file-uploader class="mt-2" [config]="afuConfig" (ApiResponse)="imageUpload($event)">
+                    </angular-file-uploader>
+                    <img class="img-fluid pt-2 pl-3" src="{{globalURL + 'post/image/' + post.image}}" alt="">
+
+                </div>
+            </div>
+            <hr>
+            <section class="row">
+                <div class="col-6">
+                    <input type="submit" value="Save" class="btn btn-success" [disabled]="postForm.invalid">
+                </div>
+                <div class="col-6">
+                    <input type="button" (click)="btnCancel()" value="Cancel" class="btn btn-danger">
+                </div>
+            </section>
+        </form>
+    </div>
+</div>

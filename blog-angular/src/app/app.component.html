@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="#" class="navbar-brand">
+      <img width="40" alt="Angular Logo"
+        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==" />
+      NG-Blog
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-expanded="false"
+      aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse " id="navbarMenu">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a [routerLink]="['/home']" class="nav-link"> Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link" id="dropdownCategories" role="button" data-toggle="dropdown"> Categories</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownCategories" >
+              <a *ngFor="let category of categories"[routerLink]="['category-detail',category.id]" class="dropdown-item">{{category.name}}</a>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav navbar-right" *ngIf="!identity">
+        <li class="nav-item">
+          <a class="nav-link " [routerLink]="['/login']">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " [routerLink]="['/register']">SignUp</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav navbar-right" *ngIf="identity && identity.name">
+        <li class="nav-item" *ngIf="identity && identity.image">
+          <img class="userImg" src="{{globalURL + 'user/avatar/' + identity.image}}" alt="">
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMiCuenta" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{identity.name + ' ' + identity.surname}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="#dropdownMiCuenta">
+            <a [routerLink]="['/create-post']" class="dropdown-item">Create post</a>
+            <a class="dropdown-item" [routerLink]="['/create-category']">Create category</a>
+            <div class="dropdown-divider"></div>
+            <a [routerLink]="['/profile', identity.sub]" class="dropdown-item">My profile</a>
+            <a [routerLink]="['/settings']" class="dropdown-item">Settings</a>
+            <a [routerLink]="['/logout/1']" class="dropdown-item">Exit</a>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+<router-outlet></router-outlet>
+
+<footer>
+  <hr>
+    Design and developed by Gabuvi7 &copy;
+</footer>
+
+</div>

@@ -1,0 +1,22 @@
+
+<div class="col-md-12 mt-3">
+    <h1> {{page_title}}</h1>
+    <div class="text-center">
+        <!-- Formulario de logueo -->
+        <form class="offset-md-3 col-md-6" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+            <p class="form-group">
+                <input type="text"  class="form-control" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="user.email" pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El campo Email no es válido.</small>
+            </p> 
+            <p class="form-group">
+                <input type="password"  class="form-control" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+            </p>
+            <!-- <p class="form-group">
+                <input type="password"  class="form-control" placeholder="Confirme su contraseña" name="pwdConfirm" #pwdConfirm="ngModel" [(ngModel)]="user.pwdConfirm" required>
+                <small *ngIf="password" class="invalid-feedback d-block">Las contraseñas deben coincidir.</small>
+            </p> -->
+            <input type="submit" value="Log In " class="btn btn-success" [disabled]="loginForm.invalid">
+
+        </form>
+    </div>
+</div>

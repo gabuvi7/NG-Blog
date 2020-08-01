@@ -1,0 +1,37 @@
+<div class="col-md-12 mt-3">
+    <h1> {{page_title}}</h1>
+    <p>SignUp to create new entrys and more! </p>
+    <div class="text-center">
+        <div class="alert alert-success offset-md-3 col-md-6" *ngIf="status == 'success'">
+            SignUp completed successfully! <a [routerLink]="['/login']">Log In here!.</a>
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            SignUp is wrong. Please, check the field ant try again.
+        </div>
+        <!-- Formulario de registro -->
+        <form class="offset-md-3 col-md-6" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+            <p class="form-group">
+                <input type="text" class="form-control" placeholder="Name" name="name" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z ]+">
+                <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">The field 'Name' is wrong.</small>
+            </p>
+            <p class="form-group">
+                <input type="text"  class="form-control" placeholder="Surname" name="surname" #surname="ngModel" [(ngModel)]="user.surname" required  pattern="[a-zA-Z]+">
+                <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">The field 'Surname' is wrong.</small>
+            </p>
+            <p class="form-group">
+                <input type="text"  class="form-control" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="user.email" pattern="[a-z0-9._+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">The field 'Email' is wrong.</small>
+            </p> 
+            <p class="form-group">
+                <input type="password"  class="form-control" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="user.password" required pattern=".{4,}">
+                <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La contraseña debe ser mayor a 4 caracteres.</small>
+            </p>
+            <!-- <p class="form-group">
+                <input type="password"  class="form-control" placeholder="Confirme su contraseña" name="pwdConfirm" #pwdConfirm="ngModel" [(ngModel)]="user.pwdConfirm" required>
+                <small *ngIf="password" class="invalid-feedback d-block">Las contraseñas deben coincidir.</small>
+            </p> -->
+            <input type="submit" value="SignUp" class="btn btn-success" [disabled]="registerForm.invalid">
+
+        </form>
+    </div>
+</div>
